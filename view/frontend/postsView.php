@@ -1,17 +1,6 @@
 <?php $title = 'Blog'; ?>
 
 <?php ob_start(); ?>
-<div class ="row">
-    <div class="col-lg-3 col-lg-offset-4">
-        <h1> Billet simple pour l'Alaska </h1>
-    </div>
-    <div class="col-lg-1">
-        <button> Inscription </button>
-    </div> 
-    <div class="col-lg-1">
-        <button> Connexion </button>
-    </div>
-</div>
 <?php
     while($data = $posts->fetch())
     {
