@@ -1,0 +1,25 @@
+body{
+    background-image: url('../images/background.jpg');
+    margin:0;
+    padding:0; 
+    -webkit-background-size: cover; /* pour anciens Chrome et Safari */
+    background-size: cover; /* version standardisée */
+
+}
+.news h3{
+    text-align:center;
+    background-color:black;
+    color:#87CEEB;
+    margin-bottom:0px;
+}
+
+.news p{
+    background-color:#F0FFFF;
+    margin:auto;
+}
+
+.col-lg-1 button{
+    background-color:#B22222;
+    margin-top:25%;
+    border-color:#8B0000;
+}
