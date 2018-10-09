@@ -22,8 +22,22 @@ body{
     background-color:#B22222;
     margin-top:25%;
     border-color:#8B0000;
+    color:white;
 }
-
+.send{
+    background-color:#B22222;
+    border-color:#8B0000;
+    color:white;
+    margin-left:10%;  
+}
+.back{
+    color:#191970
+}
+.titreComment{
+    background-color:black;
+    color:rgb(137, 161, 170);
+    margin-bottom:0;
+}
 .comment{
-   color:red;
+    background-color:#F0FFFF;
 }
