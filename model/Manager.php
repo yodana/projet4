@@ -1,5 +1,5 @@
 <?php
-namespace www\tests\super_blog\model;
+namespace projetfour\model;
 use \PDO as PDO;
     class Manager
     {

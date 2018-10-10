@@ -1,5 +1,5 @@
 <?php
-namespace www\tests\super_blog\model;
+namespace projetfour\model;
 
 require_once('Manager.php');
     class PostManager extends Manager

@@ -13,11 +13,16 @@
                     <h1> Billet simple pour l'Alaska </h1>
                 </div>
             <div class="col-lg-1">
-                <button> Inscription </button>
-            </div> 
-            <div class="col-lg-1">
-                <button> Connexion </button>
-            </div>
+            <?php
+            if(!isset($_SESSION['id']))
+            {
+                echo '<a href="index.php?action=subscribe> <button>Inscription</button></a>
+                </div> 
+                <div class="col-lg-1">
+                    <button> Connexion </button>
+                </div>';
+            }
+            ?>
             </div>
         </head>
         <?= $content ?>
