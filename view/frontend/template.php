@@ -12,15 +12,21 @@
                 <div class="col-lg-3 col-lg-offset-4">
                     <h1> Billet simple pour l'Alaska </h1>
                 </div>
-            <div class="col-lg-1">
             <?php
             if(!isset($_SESSION['id']))
             {
-                echo '<a href="index.php?action=subscribe> <button>Inscription</button></a>
+                echo '<div class="col-lg-1">
+                <a href="index.php?action=subscribe"> <button>Inscription</button></a>
                 </div> 
                 <div class="col-lg-1">
-                    <button> Connexion </button>
+                    <a href="index.php?action=connection"><button> Connexion </button></a>
                 </div>';
+            }
+            else
+            {
+                echo '<div class="col-lg-1">
+                <a href="index.php?action=logOut"> <button>Deconnexion</button></a>
+                </div>' . $_SESSION['pseudo'];
             }
             ?>
             </div>

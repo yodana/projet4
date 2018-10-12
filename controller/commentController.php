@@ -2,9 +2,12 @@
     namespace projetfour\controller;
     require_once('Controller.php');
     require_once('model\commentManager.php');
-
-    class CommentController
+    class CommentController extends Controller
     {
+        public function formSubscribe()
+        {
+            require('view/frontend/formSubscribeView.php');
+        }
         public function addComment($id, $pseudo, $message)
         {
             $commentManager = new \projetfour\model\CommentManager();

@@ -1,3 +1,4 @@
+
  <?php $title = htmlspecialchars($post['titre']) ?>
 <?php ob_start();?>
         <a href = "index.php" class="back">
@@ -26,6 +27,7 @@
             Votre commentaire: <br/>
             <textarea rows="5" cols="64" name="message"></textarea><br/>
             <input type="hidden" name="id_post" value= <?php echo $_GET['id'] ?> />
+            <input type="hidden" name="pseudo" value=<?php echo $_SESSION['pseudo'] ?> />
             <input class="send" type="submit" value="Envoyez"/>
         </form>
         <?php $comment->closeCursor(); ?>
