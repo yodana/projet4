@@ -21,7 +21,7 @@ namespace projetfour\controller;
         }
         public function newArticle($newTitle,$newArticle,$newResume)
         {
-            $adminManager = new \projetfour\controller\AdminManager();
+            $adminManager = new \projetfour\model\AdminManager();
             $adminManager->addArticle($newTitle,$newArticle,$newResume);
             header('Location:index.php?action=admin&resultat=okArticle');
         }

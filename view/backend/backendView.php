@@ -14,5 +14,11 @@
     }
     $reportComments->closeCursor();
     ?>
+    <?php if(isset($_GET['resultat']))
+        {
+            if($_GET['resultat'] === "okArticle")
+                echo '<p> Nouveau article bien ajouté </p>';
+        }
+        ?>
 <?php $content = ob_get_clean(); ?>
 <?php require('view/frontend/template.php'); ?>

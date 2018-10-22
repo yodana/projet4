@@ -74,8 +74,14 @@
                 else if($_GET['resultat'] === "sendNewArticle")
                 {
                     $controller = new \projetfour\controller\AdminController();
-                    $controller->newArticle();
+                    $controller->newArticle(html_entity_decode($_POST['title']), html_entity_decode($_POST['article']), html_entity_decode($_POST['resume']));
                 }
+                else
+                {
+                    $controller = new \projetfour\controller\AdminController();
+                    $controller->backend();
+                }
+
             }
         }
         else
