@@ -4,7 +4,13 @@
         <meta charset="utf-8" />
         <title><?=$title?></title>
         <link href="public/assets/css/bootstrap.css" rel="stylesheet">
-        <link href="public/css/style.css" rel="stylesheet" /> 
+        <link href="public/css/style.css" rel="stylesheet" />
+        <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+        <script>
+            tinymce.init({
+                selector: '.formArticle'
+            });
+        </script>
     </head>  
     <body>
         <head>
@@ -27,6 +33,8 @@
                 echo '<div class="col-lg-1">
                 <a href="index.php?action=logOut"> <button>Deconnexion</button></a>
                 </div>' . $_SESSION['pseudo'];
+               if ($_SESSION['id_groupe'])
+                 echo '<a href=index.php?action=admin> Espace administateur </a>';
             }
             ?>
             </div>

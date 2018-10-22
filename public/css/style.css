@@ -41,3 +41,7 @@ body{
 .comment{
     background-color:#F0FFFF;
 }
+
+tinymce.init({
+    selector: '#mytextarea'
+  });

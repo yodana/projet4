@@ -45,7 +45,16 @@
                 'pseudo' => $pseudo,
             ));
             $data = $req->fetch();
-            return $data;
+            return $data['id'];
+        }
+        public function id_groupe($pseudo)
+        {
+            $db = $this->dbConnect();
+            $req = $db->prepare('SELECT id_groupe FROM membres WHERE pseudo=:pseudo');
+            $req->execute(array(
+                'pseudo' => $pseudo,
+            ));
+            $data = $req->fetch();
+            return $data['id_groupe'];
         }
     }
-    

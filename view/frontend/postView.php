@@ -1,6 +1,9 @@
 
  <?php $title = htmlspecialchars($post['titre']) ?>
 <?php ob_start();?>
+<?php 
+    if(isset($_SESSION['pseudo']))
+    {?>
         <a href = "index.php" class="back">
             Retour à la liste des billets
         </a>
@@ -31,7 +34,9 @@
             <input class="send" type="submit" value="Envoyez"/>
         </form>
         <?php $comment->closeCursor(); ?>
+        <?php }
+        else
+            echo '<h4 class="col-lg-offset-5"> Veuillez vous inscrire ou vous connecter pour voir l\'article </h4>'; 
+        ?>
 <?php $content = ob_get_clean(); ?>
-
-
 <?php require('template.php'); ?>

@@ -3,6 +3,7 @@
     require('controller/postController.php');
     require('controller/commentController.php');
     require('controller/membersController.php');
+    require('controller/AdminController.php');
     try{
         if(isset($_GET['action']))
         {
@@ -14,7 +15,7 @@
                     $controller->post();
                 }
             }
-            elseif ($_GET['action'] == "addComment") 
+            else if ($_GET['action'] == "addComment") 
             {
                 $controller = new projetfour\controller\CommentController();
                 $controller->addComment($_POST['id_post'], $_POST['pseudo'], $_POST['message']);
@@ -26,10 +27,9 @@
                 {
                     $controller->formSubscribe();
                 }
-                else if(isset($_GET['resultat']))
+                else 
                 {
-                        if($controller->verifSubscribe($_POST['pseudo'],$_POST['password'],$_POST['password2'],$_POST['email']) === 'ok')
-                            $controller->addMember($_POST['pseudo'],$_POST['password'],$_POST['email']);
+                    $controller->verifSubscribe($_POST['pseudo'],$_POST['password'],$_POST['password2'],$_POST['email']);
                 }
             }
             else if($_GET['action'] === "connection" AND !isset($_SESSION['id']))
@@ -41,8 +41,40 @@
                 }
                 else if($_GET['resultat'] === "ok")
                 {
-                    if($controller->verifConnect(htmlspecialchars($_POST['pseudo']),htmlspecialchars($_POST['password'])))
-                        $controller->connect(htmlspecialchars($_POST['pseudo']));
+                    $controller->verifConnect(htmlspecialchars($_POST['pseudo']),htmlspecialchars($_POST['password']));
+                }
+            }
+            else if($_GET['action'] === "logOut")
+            {
+                $controller = new projetfour\controller\MembersController();
+                $controller->logOut();
+            }
+            else if($_GET['action'] === "admin" AND $_SESSION['id_groupe'])
+            {
+                if(!isset($_GET['resultat']))
+                {
+                    $controller = new projetfour\controller\AdminController();
+                    $controller->backend();
+                }
+                else if($_GET['resultat'] === "update" AND !isset($_GET['id']))
+                {
+                    $controller = new \projetfour\controller\PostController();
+                    $controller->listPost();
+                }
+                else if($_GET['resultat'] === "create")
+                {
+                    $controller = new \projetfour\controller\AdminController();
+                    $controller->create();
+                }
+                else if($_GET['resultat'] === "delete")
+                {
+                    $controller = new \projetfour\controller\PostController();
+                    $controller->listPost();
+                }
+                else if($_GET['resultat'] === "sendNewArticle")
+                {
+                    $controller = new \projetfour\controller\AdminController();
+                    $controller->newArticle();
                 }
             }
         }

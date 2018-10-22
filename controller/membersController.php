@@ -25,7 +25,7 @@
                 $verif = parent::secureEmail($email);
                 header('Location:index.php?action=subscribe&error=' . $verif);
             }
-                return 'ok';
+                $this->addMember($pseudo,$password,$email);
         }
         public function addMember($pseudo,$password,$email)
         {
@@ -53,16 +53,25 @@
             {
                 $data = $memberManager->password($pseudo);
                 if(password_verify($password,$data['pass']))
-                    return 'ok';
+                    $this->connect($pseudo);
+                else
+                    header('Location:index.php?action=connection&error=false');
             }
-            header('Location:index.php?action=connection&error=false');
+            else
+                header('Location:index.php?action=connection&error=false');
         }
         public function connect($pseudo)
         {
             $memberManager = new \projetfour\model\MembersManager();
-            session_start();
-            $_SESSION['id'] = $memberManager->id();
+            $_SESSION['id'] = $memberManager->id($pseudo);
             $_SESSION['pseudo'] = $pseudo;
+            $_SESSION['id_groupe'] = $memberManager->id_groupe($pseudo);
+            header('Location:index.php');
+        }
+        public function logOut()
+        {
+            $_SESSION = array();
+            session_destroy();
             header('Location:index.php');
         }
     }
