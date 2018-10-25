@@ -16,11 +16,12 @@ require_once('Manager.php');
         public function postComment($id,$auteur,$message)
         {
             $db = $this->dbConnect();
-            $comment = $db->prepare('INSERT INTO commentaires (auteur,commentaire,date_commentaire,id_billet) VALUES(:auteur,:commentaire,NOW(),:id_post)');
+            $comment = $db->prepare('INSERT INTO commentaires (auteur,commentaire,date_commentaire,id_billet,strikes) VALUES(:auteur,:commentaire,NOW(),:id_post,:strikes)');
             $affectedLines = $comment->execute(array(
                 'auteur' => htmlspecialchars($auteur),
                 'commentaire' => htmlspecialchars($message),
-                'id_post' => $id
+                'id_post' => $id,
+                'strikes' => 0
             ));
             return $affectedLines;
         }
@@ -33,6 +34,16 @@ require_once('Manager.php');
             ));
             return $comment;
         }
+        public function strikes($id)
+        {
+            $db = $this->dbConnect();
+            $comment = $db->prepare('SELECT strikes FROM commentaires WHERE id=:id');
+            $comment->execute(array(
+                'id' => $id
+            ));
+            $data = $comment->fetch();
+            return $data['strikes'];
+        }
         public function modifComment($id,$newMessage)
         {
             $db =$this->dbConnect();
@@ -40,6 +51,15 @@ require_once('Manager.php');
             $comment->execute(array(
                 'newMessage' => $newMessage,
                 'id' => $id
+            ));
+        }
+        public function addStrikes($id,$strikes)
+        {
+            $db = $this->dbConnect();
+            $comment = $db->prepare('UPDATE commentaires SET strikes=:strikes WHERE id=:id');
+            $comment->execute(array(
+                'id' => $id,
+                'strikes' => $strikes
             ));
         }
      }

@@ -6,18 +6,19 @@ body{
     background-size: cover; /* version standardisée */
 
 }
-.news h3{
+.titre{
     text-align:center;
-    background-color:black;
-    color:rgb(137, 161, 170);
-    margin-bottom:0px;
+   background-color:black;
+   color:rgb(137, 161, 170); 
 }
 
-.news p{
+.news{
     background-color:#F0FFFF;
-    margin:auto;
 }
-
+.resume{
+    margin:auto;
+    background-color:#F0FFFF;
+}
 .col-lg-1 button{
     background-color:#B22222;
     margin-top:25%;
@@ -41,7 +42,3 @@ body{
 .comment{
     background-color:#F0FFFF;
 }
-
-tinymce.init({
-    selector: '#mytextarea'
-  });

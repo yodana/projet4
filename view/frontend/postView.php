@@ -10,11 +10,11 @@
         <?php
          echo '<div class ="news">';
          echo
-                         '<h3>'
-                             . htmlspecialchars($post['titre']) .
-                         '</h3>
+                         '<div class="titre">'
+                             . $post['titre'] .
+                         '</div>
                          <p>'
-                             . htmlspecialchars($post['contenu']) . '<br/>';
+                             . $post['contenu'] . '<br/>';
                 echo '</p></div>';
             ?>
         <h1>
@@ -23,7 +23,7 @@
         <?php
             while ($data = $comment->fetch()) {
                 echo '<div class ="row"><div class="col-lg-3"><p class="titreComment"><strong>' . htmlspecialchars($data['auteur']) . '</strong> le ' . $data['date_day_post'] . '</p> 
-                <p class="comment"> ' . nl2br(htmlspecialchars($data['commentaire'])) . '<a href="index.php?action=alert"> Signalez </a></p></div></div>';
+                <p class="comment"> ' . nl2br(htmlspecialchars($data['commentaire'])) . '<a href="index.php?action=postView&id=' . $data['id'] . '&alert=report"> Signalez </a></p></div></div>';
             }
         ?>
         <form method="post" action="index.php?action=addComment&amp;id=<?= $_GET['id'] ?>">

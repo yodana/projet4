@@ -18,4 +18,13 @@
                 header('Location: index.php?action=postView&id=' . $id);
             }
         }
+
+        public function addStrike($id)
+        {
+            $commentManager = new \projetfour\model\CommentManager();
+            $strikes = $commentManager->strikes($id);
+            $strikes++;
+            $commentManager->addStrikes($id, $strikes);
+            header('Location:index.php?action=postView&id=' . $_GET['id'] . '&alert=ok');
+        }
     }

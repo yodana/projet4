@@ -11,8 +11,17 @@
             {
                 if($_GET['id'] > 0)
                 {
-                    $controller = new projetfour\controller\Controller();
-                    $controller->post();
+                    if(isset($_GET['alert']))
+                    {
+                        if($_GET['alert'] === "report")
+                        {
+                            $controller = new \projetfour\controller\CommentController();
+                            $controller->addStrike($_GET['id']);
+                        }
+
+                    }
+                        $controller = new projetfour\controller\Controller();
+                        $controller->post();
                 }
             }
             else if ($_GET['action'] == "addComment") 
@@ -58,8 +67,15 @@
                 }
                 else if($_GET['resultat'] === "update" AND !isset($_GET['id']))
                 {
-                    $controller = new \projetfour\controller\PostController();
-                    $controller->listPost();
+                    if(isset($_GET['id']))
+                    {
+                        $controller = new \projetfour\controller\AdminController();
+                        $controller->update($_GET['id']);
+                    }
+                    else{
+                        $controller = new \projetfour\controller\PostController();
+                        $controller->listPost();
+                    }
                 }
                 else if($_GET['resultat'] === "create")
                 {
@@ -74,7 +90,7 @@
                 else if($_GET['resultat'] === "sendNewArticle")
                 {
                     $controller = new \projetfour\controller\AdminController();
-                    $controller->newArticle(html_entity_decode($_POST['title']), html_entity_decode($_POST['article']), html_entity_decode($_POST['resume']));
+                    $controller->newArticle(stripslashes($_POST['title']),stripslashes($_POST['article']),stripslashes($_POST['resume']));
                 }
                 else
                 {
