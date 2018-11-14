@@ -1,7 +1,5 @@
 <?php
     namespace projetfour\controller;
-    require_once('Controller.php');
-    require_once('model/membersManager.php');
     class MembersController extends Controller
     {
         public function formSubscribe()
@@ -20,11 +18,12 @@
                 $verif = $this->securePassword($password,$password2);
                 header('Location:index.php?action=subscribe&error=' . $verif);
             }
-            else if(parent::secureEmail($email) !== true)
+            else if($this->secureEmail($email) !== true)
             {
-                $verif = parent::secureEmail($email);
+                $verif = $this->secureEmail($email);
                 header('Location:index.php?action=subscribe&error=' . $verif);
             }
+            else
                 $this->addMember($pseudo,$password,$email);
         }
         public function addMember($pseudo,$password,$email)
@@ -70,7 +69,6 @@
         }
         public function logOut()
         {
-            $_SESSION = array();
             session_destroy();
             header('Location:index.php');
         }

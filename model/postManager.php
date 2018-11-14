@@ -11,7 +11,7 @@ require_once('Manager.php');
         }
         public function getPost($id){
             $db = $this->dbConnect();
-            $req = $db->prepare('SELECT id, titre, contenu, DATE_FORMAT(date_creation,\'%d/%m/%Y à %Hh%imin%ss\') AS date_day FROM billets WHERE id=:id_post');
+            $req = $db->prepare('SELECT id, resume, titre, contenu, DATE_FORMAT(date_creation,\'%d/%m/%Y à %Hh%imin%ss\') AS date_day FROM billets WHERE id=:id_post');
             $req->execute(array(
                 'id_post' => $id
             ));

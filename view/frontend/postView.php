@@ -23,7 +23,10 @@
         <?php
             while ($data = $comment->fetch()) {
                 echo '<div class ="row"><div class="col-lg-3"><p class="titreComment"><strong>' . htmlspecialchars($data['auteur']) . '</strong> le ' . $data['date_day_post'] . '</p> 
-                <p class="comment"> ' . nl2br(htmlspecialchars($data['commentaire'])) . '<a href="index.php?action=postView&id=' . $data['id'] . '&alert=report"> Signalez </a></p></div></div>';
+                <p class="comment"> ' . nl2br(htmlspecialchars($data['commentaire']));
+                if(!($data['valid']))
+                    echo '<a href="index.php?action=postView&id_comment=' . $data['id'] . '&id=' . $_GET['id'] . '&alert=report"> Signalez </a>';
+                echo '</p></div></div>';
             }
         ?>
         <form method="post" action="index.php?action=addComment&amp;id=<?= $_GET['id'] ?>">

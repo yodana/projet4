@@ -7,7 +7,7 @@ require_once('Manager.php');
         public function getComments($id)
         {
             $db = $this->dbConnect();
-            $comment = $db->prepare('SELECT id,auteur,commentaire, DATE_FORMAT(date_commentaire,\'%d/%m/%Y à %Hh%imin%ss\') AS date_day_post FROM commentaires WHERE id_billet=:id_post ORDER BY date_commentaire DESC LIMIT 0,5');  
+            $comment = $db->prepare('SELECT id,auteur,commentaire,valid, DATE_FORMAT(date_commentaire,\'%d/%m/%Y à %Hh%imin%ss\') AS date_day_post FROM commentaires WHERE id_billet=:id_post ORDER BY date_commentaire DESC LIMIT 0,5');  
             $comment->execute(array(
                      'id_post' => $id
             ));
@@ -16,12 +16,13 @@ require_once('Manager.php');
         public function postComment($id,$auteur,$message)
         {
             $db = $this->dbConnect();
-            $comment = $db->prepare('INSERT INTO commentaires (auteur,commentaire,date_commentaire,id_billet,strikes) VALUES(:auteur,:commentaire,NOW(),:id_post,:strikes)');
+            $comment = $db->prepare('INSERT INTO commentaires (auteur,commentaire,date_commentaire,id_billet,strikes,valid) VALUES(:auteur,:commentaire,NOW(),:id_post,:strikes,:valid)');
             $affectedLines = $comment->execute(array(
                 'auteur' => htmlspecialchars($auteur),
                 'commentaire' => htmlspecialchars($message),
                 'id_post' => $id,
-                'strikes' => 0
+                'strikes' => 0,
+                'valid' => 0
             ));
             return $affectedLines;
         }

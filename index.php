@@ -1,9 +1,14 @@
 <?php
     session_start();
+    require_once('controller/Controller.php');
     require('controller/postController.php');
     require('controller/commentController.php');
     require('controller/membersController.php');
-    require('controller/AdminController.php');
+    require('controller/adminController.php');
+    require_once('model/adminManager.php');
+    require_once('model/postManager.php');
+    require_once('model/commentManager.php');
+    require_once('model/membersManager.php');
     try{
         if(isset($_GET['action']))
         {
@@ -16,9 +21,8 @@
                         if($_GET['alert'] === "report")
                         {
                             $controller = new \projetfour\controller\CommentController();
-                            $controller->addStrike($_GET['id']);
+                            $controller->addStrike($_GET['id_comment'],$_GET['id']);
                         }
-
                     }
                         $controller = new projetfour\controller\Controller();
                         $controller->post();
@@ -32,11 +36,11 @@
             else if($_GET['action'] === "subscribe" AND !isset($_SESSION['id']))
             {
                 $controller = new projetfour\controller\MembersController();
-                if(!isset($_GET['resultat']))
+                if(!isset($_GET['resultat']) OR isset($_GET['error']))
                 {
                     $controller->formSubscribe();
                 }
-                else 
+                else
                 {
                     $controller->verifSubscribe($_POST['pseudo'],$_POST['password'],$_POST['password2'],$_POST['email']);
                 }
@@ -65,7 +69,7 @@
                     $controller = new projetfour\controller\AdminController();
                     $controller->backend();
                 }
-                else if($_GET['resultat'] === "update" AND !isset($_GET['id']))
+                else if($_GET['resultat'] === "update")
                 {
                     if(isset($_GET['id']))
                     {
@@ -84,6 +88,11 @@
                 }
                 else if($_GET['resultat'] === "delete")
                 {
+                    if(isset($_GET['id']))
+                    {
+                        $controller = new \projetfour\controller\AdminController();
+                        $controller->delete($_GET['id']);
+                    }
                     $controller = new \projetfour\controller\PostController();
                     $controller->listPost();
                 }
@@ -92,12 +101,21 @@
                     $controller = new \projetfour\controller\AdminController();
                     $controller->newArticle(stripslashes($_POST['title']),stripslashes($_POST['article']),stripslashes($_POST['resume']));
                 }
+               else if ($_GET['resultat'] === "deleteComment" AND isset($_GET['id']))
+                {
+                    $controller = new \projetfour\controller\AdminController();
+                    $controller->deleteComment($_GET['id']);
+                }
+                else if ($_GET['resultat'] === "validComment" AND isset($_GET['id']))
+                {
+                    $controller = new \projetfour\controller\AdminController();
+                    $controller->validComment($_GET['id']);
+                }
                 else
                 {
                     $controller = new \projetfour\controller\AdminController();
                     $controller->backend();
                 }
-
             }
         }
         else

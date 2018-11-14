@@ -1,8 +1,6 @@
 <?php
 
 namespace projetfour\controller;
-    require_once('Controller.php');
-    require_once('model/postManager.php');
 
 class PostController extends Controller
 {

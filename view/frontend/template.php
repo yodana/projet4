@@ -32,7 +32,7 @@
             {
                 echo '<div class="col-lg-1">
                 <a href="index.php?action=logOut"> <button>Deconnexion</button></a>
-                </div>' . $_SESSION['pseudo'];
+                </div>';
                if ($_SESSION['id_groupe'])
                  echo '<a href=index.php?action=admin> Espace administateur </a>';
             }

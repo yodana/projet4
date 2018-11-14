@@ -1,7 +1,5 @@
 <?php
     namespace projetfour\controller;
-    require_once('Controller.php');
-    require_once('model\commentManager.php');
     class CommentController extends Controller
     {
         public function formSubscribe()
@@ -19,12 +17,12 @@
             }
         }
 
-        public function addStrike($id)
+        public function addStrike($id,$id_billet)
         {
             $commentManager = new \projetfour\model\CommentManager();
             $strikes = $commentManager->strikes($id);
             $strikes++;
             $commentManager->addStrikes($id, $strikes);
-            header('Location:index.php?action=postView&id=' . $_GET['id'] . '&alert=ok');
+            header('Location:index.php?action=postView&id=' . $id_billet);
         }
     }
